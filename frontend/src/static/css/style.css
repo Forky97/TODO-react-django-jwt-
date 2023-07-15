@@ -1,0 +1,237 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    z-index: 999;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .header nav li {
+    margin-left: 10px;
+  }
+  
+  .header nav li a {
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+  }
+  
+  .header nav li a:hover {
+    color: #333;
+  }
+
+
+  .header img {
+    width: 30px; /* Измените на желаемую ширину */
+    margin-right: 50px; /* Измените на желаемый отступ влево */
+  }
+
+
+  .login_user {
+    padding-left: 1200px;
+    }
+  
+
+
+
+
+
+
+
+
+  .welcome_user {
+    margin-top: 170px; /* Измените значение на желаемый отступ сверху */
+    margin-left: 30px;
+  }
+
+
+
+
+
+  
+
+
+  .formLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  
+  .formLogin form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formLogin input[type="text"],
+  .formLogin input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .formLogin input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .formLogin input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+
+
+
+
+
+
+  .todo-container {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 100px;
+    background-color: #f5f5f5;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+
+
+
+  .input_note {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+  .note-item {
+    position: relative;
+  }
+
+  .delete_note {
+    position: absolute;
+    top: 0;
+    right: 20px;
+  }
+  
+  
+
+
+
+
+
+
+
+
+
+  .todo-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .note-list {
+    list-style: none;
+    padding: 0;
+    width: 600px;
+  }
+  
+  .note-item {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .formRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+
+
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
