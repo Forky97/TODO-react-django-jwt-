@@ -145,13 +145,15 @@
 
 
   .note-item {
+    display: flex;
+    flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
+    justify-content: space-between;
     position: relative;
   }
-
-  .delete_note {
-    position: absolute;
-    top: 0;
-    right: 20px;
+  
+  .delete-note {
+    flex-shrink: 0; /* Запрещает сжатие кнопки */
+    margin-left: 400px;
   }
   
   

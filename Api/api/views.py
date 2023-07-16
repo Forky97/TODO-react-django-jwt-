@@ -11,6 +11,7 @@ from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 import jwt
+from .utils import Utils
 
 
 
@@ -21,19 +22,24 @@ class NotesRetriew(APIView):
 
     def get(self,request):
 
-        auth_header = request.headers.get('Authorization')
 
-        auth_token = auth_header.split(' ')[1]
+        ### if no swagger  off : 
 
-        payload = jwt.decode(auth_token, algorithms=['RS256'], options={"verify_signature": False})
-        user_username = payload['user']
+        username_from_token = Utils.get_user_from_token(data=request)
 
 
 
-        notes = Note.objects.filter(user__username=user_username)
+        notes = Note.objects.filter(user__username=username_from_token)
         serializer = NoteSerializer(notes, many=True)
         return Response(serializer.data)
     
+       ### if swagger on 
+
+
+
+        # notes = Note.objects.all()
+        # serializer = NoteSerializer(notes, many=True)
+        # return Response(serializer.data)
 
 
     
@@ -84,15 +90,40 @@ class NoteGetOne(APIView):
 class NoteChangeOne(APIView):
 
     @extend_schema(request=NoteSerializer, responses={'200': NoteSerializer})
-    def put(self,request,pk):
-        data = request.data
-        note = Note.objects.get(id=pk)
-        serializer = NoteSerializer(instance=note, data=data)
+    def patch(self,request,pk):
 
-        if serializer.is_valid():
-             serializer.save()
 
-        return Response(serializer.data)
+
+
+        note_to_change = Note.objects.get(id=pk)
+        note_owner = note_to_change.user
+
+
+        #### need to add authorization tokens frontend to header 
+
+
+        username_from_token = Utils.get_user_from_token(data=request)
+
+
+
+        if str(note_owner) == username_from_token:
+
+            request.data['user'] = note_owner.id
+
+
+
+            serializer = NoteSerializer(instance=note_to_change, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+
+                return Response(request.data)
+
+        else:
+
+
+            return Response({'status' : 'bad_request_400'})
+
+
 
 
 class NoteDeleteOne(APIView):
@@ -131,7 +162,7 @@ class RegistrationApiView(APIView):
             return Response({"message": "Пользователь успешно зарегистрирован."})
         
         print (serializer._errors)
-        
+
         return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
 
 

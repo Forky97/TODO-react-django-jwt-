@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Login from './components/loginForm';
 import AuthProvider from './context/AuthCont';
 import Register from './components/registerForm';
-
+import NoteProvider from './context/NoteContext';
 
 
  
@@ -22,6 +22,9 @@ function App() {
       <BrowserRouter>
     
     <AuthProvider>
+      <NoteProvider>
+
+
 
 
       <Header/> 
@@ -37,8 +40,7 @@ function App() {
   
 
 
-
-    
+          </NoteProvider>
     </AuthProvider>
 
     </BrowserRouter>

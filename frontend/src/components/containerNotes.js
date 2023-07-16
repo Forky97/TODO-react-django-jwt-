@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import '../static/css/style.css'
 import { useState,useEffect } from 'react';
 import { AuthContext } from '../context/AuthCont';
+import { NoteContext } from '../context/NoteContext';
 
 
 
@@ -14,8 +15,19 @@ import { AuthContext } from '../context/AuthCont';
 function Notes() {
 
     const [noteText, setNoteText] = useState('')
+
     const {user,authTokens,logoutUser} = useContext(AuthContext)
+    let {handleEdit,handleSave,handleCancel,updateNote} = useContext(NoteContext)
+
+    let {editing,setEditing,editedText,setEditedText} = useContext(NoteContext)
+    
     let [notes, setNotes] = useState([])
+
+
+
+
+
+
 
 
 
@@ -61,7 +73,7 @@ function Notes() {
 
     useEffect(() => {
       getNotes();
-    },[]);
+    },[updateNote]);
 
 
 
@@ -93,6 +105,18 @@ function Notes() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <div className='todo-container'>
 
@@ -103,7 +127,18 @@ function Notes() {
           <ul className='note-list'>
                 {notes.map(note => (
                     <li className='note-item' key={note.id} >{note.body}
-                          <button className='delete-note' onClick={() => deleteNote(note.id)}>Удалить</button>
+                          {editing ? (
+          <>
+             <button  className='cancel-note' onClick={ () => handleCancel()}> Отмена</button>
+
+          </>
+        ) : (
+          <>
+            <button  className='delete-note' onClick={ () => deleteNote(note.id)}> Удалить</button>
+            <button  className='change-note' onClick={ () => handleEdit(note)}> Редактировать</button>
+
+          </>
+        )}
 </li>
                 ))}
             </ul>
@@ -116,21 +151,42 @@ function Notes() {
 
 
 
-        <div className='input_note'>
+          <div className='input_note'>
 
-        <input
-        type='text'
-        value={noteText}
-        onChange={(e) => setNoteText(e.target.value)}
-        placeholder='Введите текст записи...'
-      />
-      <button onClick={AddNote}>Добавить запись!</button>
+            {editing ? (
+              <>
+               <input
+              type='text'
+              value={editedText}
+              onChange={(e) => setEditedText(e.target.value)}
+              placeholder='Введите свои изменения'
+            />
 
-        </div>
+            <button onClick={handleSave} > Сохранить изменения!</button>
+              
+              </>
+            )
+
+            : (
+              <>
+              <input
+              type='text'
+              value={noteText}
+              onChange={(e) => setNoteText(e.target.value)}
+              placeholder='Введите текст записи...'
+            />
+
+            
+              <button onClick={AddNote}>Добавить запись!</button>
+
+              </>
+            )}
+
+         </div>
 
 
           
-        </div>
+            </div>
       );
 }
 
