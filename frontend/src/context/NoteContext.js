@@ -22,6 +22,7 @@ const NoteProvider =  ({children}) => {
     let [editing, setEditing] = useState(false);
     let [noteId, setNoteId] = useState();
     let {authTokens,setAuthTokens}= useContext(AuthContext)
+    let [checkFlag,setCheckFlag] = useState(0)
 
 
    const handleEdit = (note) => {
@@ -50,16 +51,40 @@ const NoteProvider =  ({children}) => {
                 'Content-Type':'application/json',
                 'Authorization':'Bearer ' + String(authTokens.access)
             },
-            body:JSON.stringify({'body':editedText})
+            body:JSON.stringify({'body':editedText,
+                                })
         })
 
     let data = await response.json()
 
     setEditedText('')
-    
+
     
 
   }
+
+
+  const updateCheckNote = async (noteId,check) => {
+
+    let response = await fetch('http://127.0.0.1:8000/api/notes/update/'+noteId+'/', {
+            method:'PATCH',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' + String(authTokens.access)
+            },
+            body:JSON.stringify({'done':check,
+                                })
+        })
+
+    let data = await response.json()
+
+    setCheckFlag(checkFlag+1)
+
+
+
+
+  }
+
 
 
    let note_functions = {handleEdit : handleEdit,
@@ -69,7 +94,11 @@ const NoteProvider =  ({children}) => {
           editing:editing,
           setEditing:setEditing,
           editedText:editedText,
-          setEditedText:setEditedText
+          setEditedText:setEditedText,
+          updateCheckNote:updateCheckNote,
+          checkFlag:checkFlag,
+          setCheckFlag:setCheckFlag
+
         }
 
 

@@ -17,7 +17,7 @@ function Notes() {
     const [noteText, setNoteText] = useState('')
 
     const {user,authTokens,logoutUser} = useContext(AuthContext)
-    let {handleEdit,handleSave,handleCancel,updateNote} = useContext(NoteContext)
+    let {handleEdit,handleSave,handleCancel,updateNote,updateCheckNote,checkFlag} = useContext(NoteContext)
 
     let {editing,setEditing,editedText,setEditedText} = useContext(NoteContext)
     
@@ -73,7 +73,7 @@ function Notes() {
 
     useEffect(() => {
       getNotes();
-    },[updateNote]);
+    },[checkFlag,editedText]);
 
 
 
@@ -134,6 +134,11 @@ function Notes() {
           </>
         ) : (
           <>
+            <input
+              type='checkbox'
+              checked={note.done}
+              onChange={(e) => updateCheckNote(note.id, e.target.checked)} // Предположим, что поле с именем "isCompleted" обозначает статус выполнения} // Обработчик изменения состояния чекбокса
+            />
             <button  className='delete-note' onClick={ () => deleteNote(note.id)}> Удалить</button>
             <button  className='change-note' onClick={ () => handleEdit(note)}> Редактировать</button>
 

@@ -7,6 +7,8 @@ import Login from './components/loginForm';
 import AuthProvider from './context/AuthCont';
 import Register from './components/registerForm';
 import NoteProvider from './context/NoteContext';
+import './static/css/style.css'
+
 
 
  
@@ -24,6 +26,8 @@ function App() {
     <AuthProvider>
       <NoteProvider>
 
+        <div className='container dark'>
+
 
 
 
@@ -37,7 +41,7 @@ function App() {
           </Routes>
 
 
-  
+          </div>
 
 
           </NoteProvider>
