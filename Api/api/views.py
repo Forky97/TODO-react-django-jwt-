@@ -92,6 +92,8 @@ class NoteChangeOne(APIView):
     @extend_schema(request=NoteSerializer, responses={'200': NoteSerializer})
     def patch(self,request,pk):
 
+        print(request.data)
+
 
 
 

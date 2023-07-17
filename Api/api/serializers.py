@@ -27,8 +27,11 @@ class NoteSerializer(ModelSerializer):
 
 
     def update(self, instance, validated_data):
-        body = validated_data.get('body')
+        body = validated_data.get('body', instance.body)  
+        check = validated_data.get('done',instance.done)
+        print(check)
         instance.body = body
+        instance.done = check
         instance.save()
         return instance
     
